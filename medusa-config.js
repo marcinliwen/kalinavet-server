@@ -39,6 +39,13 @@ const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 const STRIPE_API_KEY = process.env.STRIPE_API_KEY || "";
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
 
+//S3 storage variables
+const S3_URL=process.env.S3_URL;
+const S3_BUCKET=process.env.S3_BUCKET;
+const S3_REGION=process.env.S3_REGION;
+const S3_ACCESS_KEY_ID=process.env.S3_ACCESS_KEY_ID;
+const S3_SECRET_ACCESS_KEY=process.env.S3_SECRET_ACCESS_KEY;
+
 // This is the place to include plugins. See API documentation for a thorough guide on plugins.
 const plugins = [
   `medusa-fulfillment-manual`,
@@ -52,6 +59,16 @@ const plugins = [
   //     webhook_secret: STRIPE_WEBHOOK_SECRET,
   //   },
   // },
+  {
+    resolve: `medusa-file-s3`,
+    options: {
+        s3_url: process.env.S3_URL,
+        bucket: process.env.S3_BUCKET,
+        region: process.env.S3_REGION,
+        access_key_id: process.env.S3_ACCESS_KEY_ID,
+        secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
+    },
+  },
 ];
 
 module.exports = {
